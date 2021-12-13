@@ -48,16 +48,17 @@ def plural_form(input_num, form_1, form_2, form_3):
 # print(125, plural_form(125, 'яблоко', 'яблока', 'яблок'))  # 125 яблок
 # print(1000, plural_form(1000, 'яблоко', 'яблока', 'яблок'))  # 1000 яблок
 # print(0, plural_form(0, 'яблоко', 'яблока', 'яблок'))  # 0 яблок
-def html(teg, **kwargs):
+def html(*args, **kwargs):
     def decorator(decorated_func):
         def wrapper(input_attribute):
-            result_wrapper = ''
-            if kwargs:
-                result_wrapper = f'<{teg} {kwargs}>{input_attribute}</{teg}>'
-            else:
-                result_wrapper = f'<{teg}>{input_attribute}</{teg}>'
-
-            return result_wrapper
+            result_wrapper = decorated_func(input_attribute)
+            for index in args:
+                result_wrapper = f'<{index}> {result_wrapper}</{index}>'
+                if kwargs:
+                    for k, v in kwargs.items():
+                        result_wrapper = f'<{k}>="{v}"{result_wrapper}</{k}>'
+                        # TODO Сделать цикл для *args и **wargs вместе (в одной строке)
+                return result_wrapper
 
         return wrapper
 
