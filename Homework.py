@@ -14,11 +14,6 @@ def fizz_buzz(input_num_start, input_num_end):
     return result
 
 
-# print('0-3', fizz_buzz(0, 3))  # 0
-# print('0-3', fizz_buzz(0, 5))  # 0
-# print('0-3', fizz_buzz(15, 15))  # 15
-# print('0-3', fizz_buzz(1000, 20000))  # 13303500
-
 def plural_form(input_num, form_1, form_2, form_3):
     '''
     returns plural form of input_num related of last digit of num
@@ -40,33 +35,27 @@ def plural_form(input_num, form_1, form_2, form_3):
     return result
 
 
-# print(1, plural_form(1, 'яблоко', 'яблока', 'яблок'))  # 1 яблоко
-# print(3, plural_form(3, 'яблоко', 'яблока', 'яблок'))  # 3 яблока
-# print(5, plural_form(5, 'яблоко', 'яблока', 'яблок'))  # 5 яблок
-# print(11, plural_form(11, 'яблоко', 'яблока', 'яблок'))  # 11 яблок
-# print(121, plural_form(121, 'яблоко', 'яблока', 'яблок'))  # 121 яблоко
-# print(125, plural_form(125, 'яблоко', 'яблока', 'яблок'))  # 125 яблок
-# print(1000, plural_form(1000, 'яблоко', 'яблока', 'яблок'))  # 1000 яблок
-# print(0, plural_form(0, 'яблоко', 'яблока', 'яблок'))  # 0 яблок
-def html(*args, **kwargs):
+def html(tag, **kwargs):
+    '''
+    decorate functions into opening and closing tags
+    :param tag: str
+    :param kwargs: dicts
+    :return:
+    '''
 
     def decorator(decorated_func):
 
         def wrapper(input_attribute):
 
-            result_wrapper = decorated_func(input_attribute)
+            attributes = ''
+            text = decorated_func(input_attribute)
 
-            if kwargs:
-                result_wrapper = f'>{result_wrapper}'
-                for k, v in kwargs.items():
-                    result_wrapper = f' {k}="{v}"{result_wrapper}'
-                for index in args:
-                    result_wrapper = f'<{index}{result_wrapper}</{index}>'
-            else:
-                for index in args:
-                    result_wrapper = f'<{index}>{result_wrapper}</{index}>'
+            for k, v in kwargs.items():
+                attributes += f' {k}="{v}"'
+            opening_tag = f'<{tag}'
+            closing_tag = f'</{tag}>'
 
-            return result_wrapper
+            return f'{opening_tag}{attributes}>{text}{closing_tag}'
 
         return wrapper
 
@@ -81,8 +70,7 @@ def to_string(input_value):
 
 
 print(to_string('ссылка на яндекс'))
-# <body><div width="200" height="100"><a href="https://yandex.ru/">ссылка на яндекс</a></div></body>  # should be
-# <body><div height="100" width="200"><a href="https://yandex.ru/">ссылка на яндекс</a></div></body>  # result of to_string('ссылка на яндекс')
+
 
 
 
