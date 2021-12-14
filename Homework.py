@@ -49,13 +49,15 @@ def plural_form(input_num, form_1, form_2, form_3):
 # print(1000, plural_form(1000, 'яблоко', 'яблока', 'яблок'))  # 1000 яблок
 # print(0, plural_form(0, 'яблоко', 'яблока', 'яблок'))  # 0 яблок
 def html(*args, **kwargs):
+
     def decorator(decorated_func):
+
         def wrapper(input_attribute):
+
             result_wrapper = decorated_func(input_attribute)
 
             if kwargs:
                 result_wrapper = f'>{result_wrapper}'
-                # for index in args:
                 for k, v in kwargs.items():
                     result_wrapper = f' {k}="{v}"{result_wrapper}'  # <
                 for index in args:
@@ -63,10 +65,7 @@ def html(*args, **kwargs):
             else:
                 for index in args:
                     result_wrapper = f'<{index}>{result_wrapper}</{index}>'
-            # if kwargs:
-            #     for k, v in kwargs.items():
-            #         result_wrapper = f'<{k}>="{v}"{result_wrapper}</{k}>'
-                        # TODO Сделать цикл для *args и **wargs вместе (в одной строке)
+
             return result_wrapper
 
         return wrapper
@@ -82,6 +81,10 @@ def to_string(input_value):
 
 
 print(to_string('ссылка на яндекс'))
-
 # <body><div width="200" height="100"><a href="https://yandex.ru/">ссылка на яндекс</a></div></body>  # should be
-# <body><div height="100" width="200"><a href="https://yandex.ru/">ссылка на яндекс</a></div></body>  # result
+# <body><div height="100" width="200"><a href="https://yandex.ru/">ссылка на яндекс</a></div></body>  # result of to_string('ссылка на яндекс')
+
+
+
+
+
