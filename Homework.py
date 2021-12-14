@@ -59,7 +59,7 @@ def html(*args, **kwargs):
             if kwargs:
                 result_wrapper = f'>{result_wrapper}'
                 for k, v in kwargs.items():
-                    result_wrapper = f' {k}="{v}"{result_wrapper}'  # <
+                    result_wrapper = f' {k}="{v}"{result_wrapper}'
                 for index in args:
                     result_wrapper = f'<{index}{result_wrapper}</{index}>'
             else:
